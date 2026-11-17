@@ -103,6 +103,7 @@ model User {
   notifications Notification[]
   createdConfigVersions RuleConfigurationVersion[]
   triggeredRuns AssignmentRun[]
+  devices PushDevice[]
 }
 
 model Student {
@@ -281,6 +282,7 @@ model AssignmentRun {
   algorithm AssignmentAlgorithm
   status RunStatus @default(PENDING)
   label String?
+  isPublished Boolean @default(false)
 
   durationMs Int?
   firstWishRate Float?
@@ -333,6 +335,14 @@ model Notification {
   userId Int
   title String
   body String
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model PushDevice {
+  id Int @id @default(autoincrement())
+  userId Int
+  token String @unique
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
