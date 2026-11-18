@@ -137,10 +137,11 @@ model Destination {
   teachingLanguages String[]
   localLife String
 
-  monthlyHousing Float
-  monthlyFood Float
-  monthlyTransport Float
-  monthlyTotal Float
+  monthlyHousing String
+  monthlyFood String
+  monthlyTransport String
+  monthlyTotal String
+  currency String
 
   seats Int
   minGpa Float
