@@ -9,10 +9,15 @@ COPY . .
 RUN npm run build
 
 
-# --- Stage 2: serve them with nginx ---
-FROM nginx:alpine AS runner
+# --- Stage 2: serve them with nginx, as a non-root user ---
+# nginx-unprivileged runs as the "nginx" user (uid 101) and listens on 8080,
+# since non-root processes cannot bind ports below 1024.
+FROM nginxinc/nginx-unprivileged:alpine AS runner
 
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Files in /etc/nginx/templates are processed with envsubst at startup:
+# ${BACKEND_HOST} and ${BACKEND_PORT} are replaced by the container's env vars.
+COPY nginx.conf.template /etc/nginx/templates/default.conf.template
 COPY --from=builder /app/dist /usr/share/nginx/html
 
-EXPOSE 80
+USER nginx
+EXPOSE 8080
