@@ -152,7 +152,6 @@ model Destination {
   fees Float?
 
   photos DestinationPhoto[]
-  sources DestinationSource[]
   wishes Wish[]
   assignments Assignment[]
   assignmentExplanation AssignmentExplanation[]
@@ -173,18 +172,6 @@ model DestinationPhoto {
   licenseUrl String?
   sourceUrl String
   position Int @default(0)
-
-  destination Destination @relation(fields: [destinationId], references: [id], onDelete: Cascade)
-
-  @@index([destinationId])
-}
-
-model DestinationSource {
-  id Int @id @default(autoincrement())
-  destinationId Int
-  field DataField
-  label String
-  url String
 
   destination Destination @relation(fields: [destinationId], references: [id], onDelete: Cascade)
 
