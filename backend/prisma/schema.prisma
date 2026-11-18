@@ -113,10 +113,10 @@ model Student {
   surname String
   gpa Float
   englishTest EnglishTest
-  englishScore Int
+  englishScore Float
   associativeScore Int
 
-  user User @relation(fields: [userId], references: [id])
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   wishes Wish[]
   criterionValues StudentCriterionValue[]
   assignments Assignment[]
@@ -150,7 +150,7 @@ model Destination {
   period StayPeriod
   fees Float?
 
-  photos DestinationsPhoto[]
+  photos DestinationPhoto[]
   sources DestinationSource[]
   wishes Wish[]
   assignments Assignment[]
@@ -161,18 +161,19 @@ model Destination {
   @@index([country])
 }
 
-model DestinationsPhoto {
+model DestinationPhoto {
   id Int @id @default(autoincrement())
   destinationId Int
   url String
-  altText String
+  altText String?
+  isDecorative Boolean @default(false)
   author String
   license String
   licenseUrl String?
   sourceUrl String
   position Int @default(0)
 
-  destination Destination @relation(fields: [destinationId], references: [id])
+  destination Destination @relation(fields: [destinationId], references: [id], onDelete: Cascade)
 
   @@index([destinationId])
 }
@@ -244,6 +245,7 @@ model RuleConfigurationVersion {
   userId Int
   version Int
   comment String?
+  createdAt DateTime @default(now())
 
   configuration RuleConfiguration @relation(fields: [configurationId], references: [id], onDelete: Cascade)
   createdBy User @relation(fields: [userId], references: [id])
@@ -263,7 +265,7 @@ model RuleItem {
 
   weight Float?
   operator ComparisonOperator?
-  treshold Float?
+  threshold Float?
   bonusPoints Float?
   descending Boolean @default(true)
   position Int @default(0)
@@ -283,6 +285,8 @@ model AssignmentRun {
   status RunStatus @default(PENDING)
   label String?
   isPublished Boolean @default(false)
+  createdAt DateTime @default(now())
+  inputHash String?
 
   durationMs Int?
   firstWishRate Float?
@@ -325,7 +329,7 @@ model AssignmentExplanation {
   details Json?
 
   assignment Assignment @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
-  destination Destination @relation(fields: [destinationId], references: [id], onDelete: Cascade)
+  destination Destination @relation(fields: [destinationId], references: [id])
 
   @@unique([assignmentId, wishRank])
 }
@@ -335,6 +339,7 @@ model Notification {
   userId Int
   title String
   body String
+  createdAt DateTime @default(now())
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
