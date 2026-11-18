@@ -33,3 +33,18 @@ npx expo start
 ```
 
 Then scan the QR code with Expo Go.
+
+### Build the Android APK
+
+The APK is built in the cloud with [EAS Build](https://docs.expo.dev/build/introduction/), an [Expo account](https://expo.dev/signup) is needed.
+
+The API URL is set at build time : set `EXPO_PUBLIC_API_URL` in the `preview` profile of `mobile/eas.json` before building (`mobile/.env` is not sent to the build).
+
+To build the APK, here's the command :
+```
+cd mobile
+npx eas-cli@latest login
+npx eas-cli@latest build -p android --profile preview
+```
+
+Once the build is done, download the APK from the link given in the terminal and install it on your phone.

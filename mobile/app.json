@@ -2,6 +2,7 @@
   "expo": {
     "name": "International-Mobility-Platform",
     "slug": "International-Mobility-Platform",
+    "owner": "international-mobility-platform",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -17,7 +18,8 @@
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.internationalmobilityplatform.app"
     },
     "web": {
       "output": "server",
@@ -37,6 +39,16 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {
+        "asyncRoutes": {
+          "web": true
+        }
+      },
+      "eas": {
+        "projectId": "7c3c64c0-84e1-4a2a-872a-82f76da63d07"
+      }
     }
   }
 }
