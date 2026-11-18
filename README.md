@@ -5,6 +5,7 @@
 ### Prerequisites
 - [Docker](https://www.docker.com/) and Docker Compose
 - Node.js 20+ (only needed if you want to run the app outside Docker)
+- [Expo Go](https://expo.dev/go) on your phone (only needed for the mobile app)
 
 ### Run everything with Docker (recommended)
 
@@ -17,3 +18,18 @@ To stop everything (stop Docker, remove volumes and network), here's the command
 ```
 docker compose down -v
 ```
+
+### Run the mobile app
+
+The mobile app does not run in Docker. Your phone and your computer must be on the same Wi-Fi.
+
+Copy `mobile/.env.example` to `mobile/.env` and set `EXPO_PUBLIC_API_URL` with your computer's local IP (not `localhost`), for example `http://192.168.1.42:3000`.
+
+To start the mobile app, here's the command :
+```
+cd mobile
+npm install
+npx expo start
+```
+
+Then scan the QR code with Expo Go.
