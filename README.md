@@ -38,12 +38,18 @@ Then scan the QR code with Expo Go.
 
 The APK is built in the cloud with [EAS Build](https://docs.expo.dev/build/introduction/), an [Expo account](https://expo.dev/signup) is needed.
 
-The API URL is set at build time : set `EXPO_PUBLIC_API_URL` in the `preview` profile of `mobile/eas.json` before building (`mobile/.env` is not sent to the build).
+The API URL is set at build time from the EAS `preview` environment (`mobile/.env` is not sent to the build). To set it, here's the command :
 
-To build the APK, here's the command :
 ```
 cd mobile
 npx eas-cli@latest login
+npx eas-cli@latest env:create --environment preview --name EXPO_PUBLIC_API_URL --value "http://<your-ip>:3000" --visibility plaintext
+```
+
+To change it later, use `env:update` instead of `env:create`.
+
+To build the APK, here's the command :
+```
 npx eas-cli@latest build -p android --profile preview
 ```
 
