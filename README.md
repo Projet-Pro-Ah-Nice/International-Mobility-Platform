@@ -43,10 +43,10 @@ The API URL is set at build time from the EAS `preview` environment (`mobile/.en
 ```
 cd mobile
 npx eas-cli@latest login
-npx eas-cli@latest env:create --environment preview --name EXPO_PUBLIC_API_URL --value "http://<your-ip>:3000" --visibility plaintext
+npx eas-cli@latest env:set --environment preview --name EXPO_PUBLIC_API_URL --value "http://<your-ip>:3000" --visibility plaintext
 ```
 
-To change it later, use `env:update` instead of `env:create`.
+The same command is used to change it later.
 
 To build the APK, here's the command :
 ```
