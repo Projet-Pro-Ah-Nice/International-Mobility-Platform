@@ -4,7 +4,7 @@
 
 ### Prerequisites
 - [Docker](https://www.docker.com/) and Docker Compose
-- Node.js 20+ (only needed if you want to run the app outside Docker)
+- Node.js 22.13+ (only needed if you want to run the app outside Docker)
 - [Expo Go](https://expo.dev/go) on your phone (only needed for the mobile app)
 
 ### Run everything with Docker (recommended)
